@@ -7,7 +7,6 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 const NavBar = () => {
   const [open, setOpen] = useState(false);
   const { pathname } = useLocation();
-  // console.log(pathname);
 
   const routes = [
     { id: 1, name: "Home", path: "/", isActive: false },
