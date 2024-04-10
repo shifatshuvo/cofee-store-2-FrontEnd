@@ -2,7 +2,7 @@
 const SignIn = () => {
   return (
     <div>
-      <p>Sign in</p>
+      <h2 className="text-3xl">Sign in</h2>
     </div>
   );
 };
