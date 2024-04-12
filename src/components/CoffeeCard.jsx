@@ -2,11 +2,10 @@ import { MdDelete, MdEdit } from "react-icons/md";
 import { FaEye } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
-  const { _id, name, supplierName, quantity, taste, photo } =
-    coffee;
+  const { _id, name, supplierName, quantity, taste, photo } = coffee;
 
   const handleDelete = (_id) => {
     console.log(_id);
@@ -20,8 +19,8 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/coffees/${_id}`, {
-          method: 'DELETE',
+        fetch(`https://coffee-store-backend-d0re.onrender.com/coffees/${_id}`, {
+          method: "DELETE",
         })
           .then((res) => res.json())
           .then((data) => {
@@ -32,7 +31,7 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
                 text: "Your Coffee has been deleted.",
                 icon: "success",
               });
-              const remaining = coffees.filter(cof => cof._id !== _id);
+              const remaining = coffees.filter((cof) => cof._id !== _id);
               setCoffees(remaining);
             }
           });
@@ -64,10 +63,16 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
           </p>
         </div>
         <div className="flex flex-col space-y-2">
-          <Link to={`coffee-details/${_id}`} className="bg-green-500 hover:bg-green-600 text-gray-50 p-3 rounded-md">
+          <Link
+            to={`coffee-details/${_id}`}
+            className="bg-green-500 hover:bg-green-600 text-gray-50 p-3 rounded-md"
+          >
             <FaEye />
           </Link>
-          <Link to={`update-coffees/${_id}`} className="bg-gray-700 hover:bg-gray-800 text-gray-50 p-3 rounded-md">
+          <Link
+            to={`update-coffees/${_id}`}
+            className="bg-gray-700 hover:bg-gray-800 text-gray-50 p-3 rounded-md"
+          >
             <MdEdit />
           </Link>
           <button
@@ -85,7 +90,7 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
 CoffeeCard.propTypes = {
   coffee: PropTypes.object,
   coffees: PropTypes.array,
-  setCoffees: PropTypes.func
-}
+  setCoffees: PropTypes.func,
+};
 
 export default CoffeeCard;

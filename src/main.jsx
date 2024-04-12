@@ -9,6 +9,8 @@ import CoffeeDetails from "./components/CoffeeDetails";
 import Main from "./layout/Main";
 import SignIn from "./components/auth/SignIn";
 import SignUp from "./components/auth/SignUp";
+import AuthProviders from "./components/providers/AuthProviders";
+import Users from "./components/users/Users";
 
 const router = createBrowserRouter([
   {
@@ -18,7 +20,8 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
-        loader: () => fetch("http://localhost:5000/coffees"),
+        loader: () =>
+          fetch("https://coffee-store-backend-d0re.onrender.com/coffees"),
       },
       {
         path: "/add-coffee",
@@ -28,28 +31,40 @@ const router = createBrowserRouter([
         path: "/coffee-details/:id",
         element: <CoffeeDetails />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/coffees/${params.id}`),
+          fetch(
+            `https://coffee-store-backend-d0re.onrender.com/coffees/${params.id}`
+          ),
       },
       {
         path: "/update-coffees/:id",
         element: <UpdateCoffee />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/coffees/${params.id}`),
+          fetch(
+            `https://coffee-store-backend-d0re.onrender.com/coffees/${params.id}`
+          ),
       },
       {
-        path: '/sign-in',
-        element: <SignIn />
+        path: "/sign-in",
+        element: <SignIn />,
       },
       {
-        path: '/sign-up',
-        element: <SignUp />
-      }
+        path: "/sign-up",
+        element: <SignUp />,
+      },
+      {
+        path: "/users",
+        element: <Users />,
+        loader: () =>
+          fetch("https://coffee-store-backend-d0re.onrender.com/users"),
+      },
     ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProviders>
+      <RouterProvider router={router} />
+    </AuthProviders>
   </React.StrictMode>
 );

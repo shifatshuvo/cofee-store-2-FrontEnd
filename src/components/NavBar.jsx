@@ -9,10 +9,11 @@ const NavBar = () => {
   const { pathname } = useLocation();
 
   const routes = [
-    { id: 1, name: "Home", path: "/", isActive: false },
-    { id: 2, name: "Add Coffee", path: "/add-coffee", isActive: false },
-    { id: 3, name: "Sign In", path: "/sign-in", isActive: false },
-    { id: 4, name: "Sign Up", path: "/sign-up", isActive: false },
+    { id: 1, name: "Home", path: "/" },
+    { id: 2, name: "Add Coffee", path: "/add-coffee" },
+    { id: 2, name: "Users", path: "/users" },
+    { id: 3, name: "Sign In", path: "/sign-in" },
+    { id: 4, name: "Sign Up", path: "/sign-up" },
   ];
 
   const logo = (
@@ -51,12 +52,22 @@ const NavBar = () => {
       ${open ? "top-14" : "-top-80"}`}
       >
         <div className="">
-            {routes.map(route => (
-              <NavLink className="menu md:menu-horizontal" key={route.path} to={route.path}>
-                <p className={`hover:bg-gray-400 text-xl text-gray-600 py-1 px-2 font-semibold rounded-md ${pathname === route.path ? 'bg-gray-200' : ''}`}>{route.name}</p>
-              </NavLink>
-            ))}
-          </div>
+          {routes.map((route) => (
+            <NavLink
+              className="menu md:menu-horizontal"
+              key={route.path}
+              to={route.path}
+            >
+              <p
+                className={`hover:bg-gray-400 text-xl text-gray-600 py-1 px-2 font-semibold rounded-md ${
+                  pathname === route.path ? "bg-gray-200" : ""
+                }`}
+              >
+                {route.name}
+              </p>
+            </NavLink>
+          ))}
+        </div>
       </ul>
       <div className="md:hidden">{logo}</div>
       <div className="w-12 h-12 bg-gray-600 rounded-full border-4 border-green-600"></div>

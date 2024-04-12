@@ -25,7 +25,7 @@ const AddCoffee = () => {
     };
     console.log(coffee);
     // send data to server
-    fetch("http://localhost:5000/coffees", {
+    fetch("https://coffee-store-backend-d0re.onrender.com/coffees", {
       method: "POST",
       headers: {
         "content-type": "application/json",
