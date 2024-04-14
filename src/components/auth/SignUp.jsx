@@ -1,10 +1,12 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProviders";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const SignUp = () => {
   const { createUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleSignUp = (e) => {
     e.preventDefault();
@@ -20,25 +22,40 @@ const SignUp = () => {
         const createdAt = res.user.metadata?.creationTime;
         const user = { email, createdAt };
 
-        fetch("https://coffee-store-backend-d0re.onrender.com/users", {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(user),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-            if (data.insertedId) {
-              Swal.fire({
-                title: "Success!",
-                text: "User Added Successfully",
-                icon: "success",
-                confirmButtonText: "Ok",
-              });
-            }
-          });
+        // using axios
+        axios.post("http://localhost:5000/users", user).then((data) => {
+          console.log(data);
+          if (data.data.insertedId) {
+            Swal.fire({
+              title: "Success!",
+              text: "User Added Successfully",
+              icon: "success",
+              confirmButtonText: "Ok",
+            });
+            navigate("/");
+          }
+        });
+
+        // using fetch
+        // fetch("https://coffee-store-backend-d0re.onrender.com/users", {
+        //   method: "POST",
+        //   headers: {
+        //     "content-type": "application/json",
+        //   },
+        //   body: JSON.stringify(user),
+        // })
+        //   .then((res) => res.json())
+        //   .then((data) => {
+        //     console.log(data);
+        //     if (data.insertedId) {
+        //       Swal.fire({
+        //         title: "Success!",
+        //         text: "User Added Successfully",
+        //         icon: "success",
+        //         confirmButtonText: "Ok",
+        //       });
+        //     }
+        //   });
       })
       .catch((error) => {
         console.error(error);

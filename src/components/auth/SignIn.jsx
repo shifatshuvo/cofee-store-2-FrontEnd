@@ -1,9 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useContext, useState } from "react";
 import { AuthContext } from "../providers/AuthProviders";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const SignIn = () => {
+  const navigate = useNavigate();
   const { signInUser } = useContext(AuthContext);
   const [showPass, setShowPass] = useState(false);
 
@@ -21,18 +24,32 @@ const SignIn = () => {
           email,
           lastLoggedAt: result.user?.metadata?.lastSignInTime,
         };
+
+        // using axios
+        axios.patch("http://localhost:5000/users", user).then((data) => {
+          if (data.data.acknowledged) {
+            Swal.fire({
+              title: "Success!",
+              text: "Successfully Logged in",
+              icon: "success",
+              confirmButtonText: "Ok",
+            });
+            navigate("/");
+          }
+        });
+
         // update last logged at in the database
-        fetch("https://coffee-store-backend-d0re.onrender.com/users", {
-          method: "PATCH",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(user),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-          });
+        // fetch("https://coffee-store-backend-d0re.onrender.com/users", {
+        //   method: "PATCH",
+        //   headers: {
+        //     "content-type": "application/json",
+        //   },
+        //   body: JSON.stringify(user),
+        // })
+        //   .then((res) => res.json())
+        //   .then((data) => {
+        //     console.log(data);
+        //   });
       })
       .catch((error) => {
         console.error(error);

@@ -2,10 +2,25 @@ import { useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import { MdDelete, MdEdit } from "react-icons/md";
 import Swal from "sweetalert2";
+// import axios from "axios";
 
 const Users = () => {
   const loadedUsers = useLoaderData();
   const [users, setUsers] = useState(loadedUsers);
+  console.log(users);
+
+  // LOAD data with axios
+  // useEffect(() => {
+  //   fetch("/")
+  //     .then((res) => res.json)
+  //     .then((data) => console.log(data));
+  // }, []);
+
+  // useEffect(() => {
+  //   axios.get("/").then((data) => {
+  //     console.log(data.data);
+  //   });
+  // }, []);
 
   const handleDelete = (_id) => {
     Swal.fire({
