@@ -35,27 +35,6 @@ const SignUp = () => {
             navigate("/");
           }
         });
-
-        // using fetch
-        // fetch("https://coffee-store-backend-d0re.onrender.com/users", {
-        //   method: "POST",
-        //   headers: {
-        //     "content-type": "application/json",
-        //   },
-        //   body: JSON.stringify(user),
-        // })
-        //   .then((res) => res.json())
-        //   .then((data) => {
-        //     console.log(data);
-        //     if (data.insertedId) {
-        //       Swal.fire({
-        //         title: "Success!",
-        //         text: "User Added Successfully",
-        //         icon: "success",
-        //         confirmButtonText: "Ok",
-        //       });
-        //     }
-        //   });
       })
       .catch((error) => {
         console.error(error);
