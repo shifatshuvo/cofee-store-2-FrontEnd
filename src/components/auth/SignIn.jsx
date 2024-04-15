@@ -37,19 +37,6 @@ const SignIn = () => {
             navigate("/");
           }
         });
-
-        // update last logged at in the database
-        // fetch("https://coffee-store-backend-d0re.onrender.com/users", {
-        //   method: "PATCH",
-        //   headers: {
-        //     "content-type": "application/json",
-        //   },
-        //   body: JSON.stringify(user),
-        // })
-        //   .then((res) => res.json())
-        //   .then((data) => {
-        //     console.log(data);
-        //   });
       })
       .catch((error) => {
         console.error(error);
